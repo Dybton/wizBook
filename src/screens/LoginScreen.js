@@ -5,7 +5,6 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-n
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton'; 
 import SocialButton from '../components/SocialButton';
-
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const LoginScreen = ({ navigation }) => {
@@ -38,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
 
         <FormButton
             buttonTitle="Sign-in"
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('HomeAppStack')}
         />
 
         <TouchableOpacity 
