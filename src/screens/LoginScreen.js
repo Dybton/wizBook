@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
 
         <FormButton
             buttonTitle="Sign-in"
-            onPress={() => navigation.navigate('HomeAppStack')}
+            onPress={() => navigation.navigate('Home')}
         />
 
         <TouchableOpacity 

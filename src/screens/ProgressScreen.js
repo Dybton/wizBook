@@ -5,7 +5,7 @@ const ProgressScreen = ({ navigation }) => {
     return (
       <View style={styles.question}>
           <Text> How far have you read?  </Text>
-          <Button title="to page 30" onPress={() => navigation.navigate('StudyNow')} />
+          <Button title="to page 30" onPress={() => navigation.navigate('StudyQuestions')} />
       </View>   
     );
 };

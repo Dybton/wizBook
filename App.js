@@ -12,20 +12,20 @@ import StudyScreen from './src/screens/StudyScreen';
 import ProgressScreen from './src/screens/ProgressScreen';
 import BookDetailScreen from './src/screens/BookDetailScreen';
 
-const AppTabs = createBottomTabNavigator();
-const AppStack = createStackNavigator();
+
+const OnboardingStack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <AppStack.Navigator>
-        <AppStack.Screen name=" " component={OnboardingScreen} />
-        <AppStack.Screen
+      <OnboardingStack.Navigator>
+        <OnboardingStack.Screen name=" " component={OnboardingScreen} />
+        <OnboardingStack.Screen
           name="Login" 
           component={LoginScreen}
           options = {{ header: () => null }}
         />
-        <AppStack.Screen
+        <OnboardingStack.Screen
           name='SignUp' 
           component={SignUpScreen}
           options = {({navigation}) => ({
@@ -36,34 +36,36 @@ const App = () => {
               elevation: 0,
             }
           })}
-
         />
-        <AppStack.Screen
-           name='BookDetail' 
-           component={BookDetailScreen}
-          //  options = {{ header: () => null }}
-        />
-        <AppStack.Screen
-           name='StudyNow' 
-           component={StudyScreen}
-          //  options = {{ header: () => null }}
-        />
-        <AppStack.Screen
-           name='HomeAppStack' 
+       
+        <OnboardingStack.Screen
+           name='Home' 
            component={AppTabsScreen}
            options = {{ header: () => null }}
         />
-
-      </AppStack.Navigator>
+      </OnboardingStack.Navigator>
     </NavigationContainer>
   );
 }
+
+{/* <OnboardingStack.Screen
+name='StudyNow' 
+component={StudyScreen}
+//  options = {{ header: () => null }}
+/>
+<OnboardingStack.Screen
+name='BookDetail' 
+component={BookDetailScreen}
+//  options = {{ header: () => null }}
+/> */}
+
+const AppTabs = createBottomTabNavigator();
 
 const AppTabsScreen = () => (
   <AppTabs.Navigator>
     <AppTabs.Screen 
       name="Home" 
-      component={HomeScreen}
+      component={HomeStackScreen}
       options={{
         tabBarIcon: (props) => (
           <Ionicons
@@ -76,7 +78,7 @@ const AppTabsScreen = () => (
     />
     <AppTabs.Screen 
       name="Study" 
-      component={ProgressScreen}
+      component={StudyStackScreen}
       options={{
         tabBarIcon: (props) => (
           <Ionicons
@@ -90,5 +92,26 @@ const AppTabsScreen = () => (
   </AppTabs.Navigator>
 );
 
+const HomeStack = createStackNavigator();
+function HomeStackScreen() { 
+    return (
+      <HomeStack.Navigator>
+        <HomeStack.Screen name="Home" component={HomeScreen } />
+        <HomeStack.Screen name="BookDetail" component={BookDetailScreen} />
+      </HomeStack.Navigator>
+    );
+  }
+
+const StudyStack = createStackNavigator();
+function StudyStackScreen() {
+    return (
+      <StudyStack.Navigator>
+        <StudyStack.Screen name="SpecifyProgress" component={ProgressScreen} />
+        <StudyStack.Screen name="StudyQuestions" component={StudyScreen} />
+      </StudyStack.Navigator>
+    );
+  }
+
 export default App;
+
 

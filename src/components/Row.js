@@ -12,15 +12,13 @@ const Row = ({books, navigation}) => {
                 data={books}
                 renderItem={({item}) => {
                     return (
-                        <TouchableOpacity onPress={() => navigation.push('BookDetail', {book: item})}>
+                        <TouchableOpacity onPress={() => navigation.navigate('BookDetail', {book: item})}>
                             <BookComponent result={item}/>
                         </TouchableOpacity>
                         )
                     }}
                 /> 
-            {/* <Text style={styles.myBook}> Griddy </Text> */}
         </View>
-        
     );  
 };
 
