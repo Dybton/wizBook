@@ -37,27 +37,15 @@ const App = () => {
             }
           })}
         />
-       
         <OnboardingStack.Screen
            name='Home' 
            component={AppTabsScreen}
-           options = {{ header: () => null }}
+           options={{ headerShown: false }}
         />
       </OnboardingStack.Navigator>
     </NavigationContainer>
   );
 }
-
-{/* <OnboardingStack.Screen
-name='StudyNow' 
-component={StudyScreen}
-//  options = {{ header: () => null }}
-/>
-<OnboardingStack.Screen
-name='BookDetail' 
-component={BookDetailScreen}
-//  options = {{ header: () => null }}
-/> */}
 
 const AppTabs = createBottomTabNavigator();
 
@@ -85,6 +73,7 @@ const AppTabsScreen = () => (
             name="ios-checkmark-circle-outline"
             size={props.size}
             color={props.color}
+            
           />
         ),
       }}
@@ -96,7 +85,11 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() { 
     return (
       <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" component={HomeScreen } />
+        <HomeStack.Screen 
+          name="Home" 
+          component={HomeScreen }
+          options={{ headerShown: false }}
+        />
         <HomeStack.Screen name="BookDetail" component={BookDetailScreen} />
       </HomeStack.Navigator>
     );
