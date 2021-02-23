@@ -12,7 +12,6 @@ const StudyScreen = () => {
 };
 
 
-
 const styles = StyleSheet.create({});
 
 export default StudyScreen;
