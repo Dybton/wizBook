@@ -12,7 +12,7 @@ const WheelPicker = () => {
     <View>
       <Text>
         <Picker style={{width: 150, height: 180}}
-          lineColor="#000000" //to set top and bottom line color (Without gradients)
+          lineColor="#000000" //to set top and bottom lissdssdsdne color (Without gradients)
           lineGradientColorFrom="#008000" //to set top and bottom starting gradient line color
           lineGradientColorTo="#FF5733" //to set top and bottom ending gradient
           selectedValue={selectedItem}
