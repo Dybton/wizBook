@@ -44,11 +44,10 @@ const StudyScreen = () => {
             </Animated.View>
             {/* <Button onPress={handleFlip} title="Flip"/> */}
           </TouchableOpacity>
-          
+          <ContinueButton/>
       </View>   
     );
 };
-
 
 const styles = StyleSheet.create({
     container: {

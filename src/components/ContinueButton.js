@@ -4,9 +4,13 @@ import { windowHeight, windowWidth } from '../../utils/Dimensions';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
-const ContinueButton = ({}) => {
+const ContinueButton = ({ }) => {
     return (
-      <Button/>
+      <TouchableOpacity style={styles.buttonContainer}>
+        <View style={styles.btnTxtWrapper}> 
+          <Text style={styles.buttonText}> Continue </Text>
+        </View>
+      </TouchableOpacity>
     )
     // let bgColor = backgroundColor;
     // return (
@@ -29,6 +33,8 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     borderRadius: 3,
+    alignItems: 'center',
+    backgroundColor: 'green'
   },
   iconWrapper: {
     width: 30,
