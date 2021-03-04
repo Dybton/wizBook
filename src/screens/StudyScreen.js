@@ -4,6 +4,7 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, Image, TouchableOpaci
 // import Animated from 'react-native-reanimated';
 import ContinueButton from '../components/ContinueButton';
 import FlipCard from '../components/FlipCard';
+import StepIndicator from '../components/StepIndicator';
 
 const StudyScreen = () => {
     const animate = useRef(new Animated.Value(0));
@@ -30,7 +31,7 @@ const StudyScreen = () => {
 
     return (
       <View style={styles.container}>
-          <Text> StudyScreen </Text>
+          <Text> StudyScreeno </Text>
           <TouchableOpacity onPress={handleFlip}>
             <Animated.View style={[{ transform: [{ rotateY: interpolateFront}]}, styles.hidden]}>
               <FlipCard 
@@ -44,6 +45,8 @@ const StudyScreen = () => {
             </Animated.View>
             {/* <Button onPress={handleFlip} title="Flip"/> */}
           </TouchableOpacity>
+          <Text> See again in: </Text>
+          <StepIndicator/>
           <ContinueButton/>
       </View>   
     );
