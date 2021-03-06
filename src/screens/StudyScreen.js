@@ -4,7 +4,7 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, Image, TouchableOpaci
 // import Animated from 'react-native-reanimated';
 import ContinueButton from '../components/ContinueButton';
 import FlipCard from '../components/FlipCard';
-import StepIndicator from '../components/StepIndicator';
+import StepIndicator from '../components/ProgressSteps';
 
 const StudyScreen = () => {
     const animate = useRef(new Animated.Value(0));
