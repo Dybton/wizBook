@@ -1,111 +1,68 @@
-import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
-import React, { useState } from 'react';
+import StepIndicator from 'react-native-step-indicator';
+import React, { useState } from "react";
 import { Text, TouchableOpacity, Button, StyleSheet, View} from 'react-native';
-import { windowHeight, windowWidth } from '../../utils/Dimensions';
+ 
+const labels = ["1 Day","3 Days","1 Week","2 Weeks", "6 Weeks"];
+const indicators = ["1", "2", "3", "4", "5"];
+const customStyles = {
+  stepIndicatorSize: 25,
+  currentStepIndicatorSize:30,
+  separatorStrokeWidth: 2,
+  currentStepStrokeWidth: 3,
+  stepStrokeCurrentColor: '#fe7013',
+  stepStrokeWidth: 3,
+  stepStrokeFinishedColor: '#fe7013',
+  stepStrokeUnFinishedColor: '#aaaaaa',
+  separatorFinishedColor: '#fe7013',
+  separatorUnFinishedColor: '#aaaaaa',
+  stepIndicatorFinishedColor: '#fe7013',
+  stepIndicatorUnFinishedColor: '#ffffff',
+  stepIndicatorCurrentColor: '#ffffff',
+  stepIndicatorLabelFontSize: 13,
+  currentStepIndicatorLabelFontSize: 13,
+  stepIndicatorLabelCurrentColor: '#fe7013',
+  stepIndicatorLabelFinishedColor: '#ffffff',
+  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+  labelColor: '#999999',
+  labelSize: 13,
+  currentStepLabelColor: '#fe7013'
+};
+ 
 
-// Remember to put this into a component, once I have the functionality I need
-
-
-
-// const stepChanger = ({}) => {
-//     const [count, setCount] = useState(1);
-//     return (
-//         console.log(count)
-//     )
-// }
-
-const StepIndicator = ({ }) => {
-    const [count, setCount] = useState(1);
+const StepIndicatorFunction = ({}) => {
+    const [currentPosition, setCurrentPosition] = useState(0);
+    const rememberAnswer = () => {
+        (currentPosition < 7 ? setCurrentPosition(currentPosition + 1) : null );
+    }
+    const forgotAnswer = () => {
+        (currentPosition > 0 ? setCurrentPosition(0) : null );
+        
+    }
     return (
-    <View style={{flex: 1}}>
-        <ProgressSteps activeStep={count}>
-            <ProgressStep
-                
-                label="Tomorrow" 
-                previousBtnText="No" 
-                // previousBtnStyle={styles.previousBtnStyle}
-                nextBtnText="Yes"
-                nextBtnStyle={styles.nextBtnStyle}
-                onPrevious={() => setCount(count + 1)}
-            >
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Did you remember?</Text>
-                </View>
-                <TouchableOpacity style={styles.previousBtnStyle} onPress={() => setCount(1)}> 
-                    <Text>No</Text>
-                </TouchableOpacity>
-            </ProgressStep>
-            <ProgressStep 
-                label="1 Day" 
-                previousBtnText="No" 
-                previousBtnStyle={styles.previousBtnStyle}
-                nextBtnText="Yes"
-                nextBtnStyle={styles.nextBtnStyle}
-            >
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Did you remember?</Text>
-                </View>
-            </ProgressStep>
-            <ProgressStep 
-                label="1 Day" 
-                previousBtnText="No" 
-                previousBtnStyle={styles.previousBtnStyle}
-                nextBtnText="Yes"
-                nextBtnStyle={styles.nextBtnStyle}
-            >
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Did you remember?</Text>
-                </View>
-            </ProgressStep>
-            <ProgressStep 
-                label="1 Day" 
-                previousBtnText="No" 
-                previousBtnStyle={styles.previousBtnStyle}
-                nextBtnText="Yes"
-                nextBtnStyle={styles.nextBtnStyle}
-                
-            >
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Did you remember?</Text>
-                </View>
-            </ProgressStep>
-            <ProgressStep 
-                label="1 Day" 
-                previousBtnText="No" 
-                previousBtnStyle={styles.previousBtnStyle}
-                nextBtnText="Yes"
-                nextBtnStyle={styles.nextBtnStyle}
-            >
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Did you remember?</Text>
-                </View>
-            </ProgressStep>
-            <ProgressStep 
-                label="1 Day" 
-                previousBtnText="No" 
-                previousBtnStyle={styles.previousBtnStyle}
-                nextBtnText="Yes"
-                nextBtnStyle={styles.nextBtnStyle}
-                finishBtnText="Yes"
-            >
-                <View style={{ alignItems: 'center' }}>
-                    <Text>Did you remember?</Text>
-                </View>
-            </ProgressStep>
-        </ProgressSteps>
-    </View>
+        <View>
+            <View>
+                <Text> You will see this again in .. </Text>
+            </View>
+            <View>
+                <StepIndicator
+                    customStyles={customStyles}
+                    currentPosition={currentPosition}
+                    labels={labels}
+                    // renderStepIndicator={indicators}
+                    stepCount="7"
+                    customStyles= {'1'}
+                />
+            </View>
+            {/* Put these buttons in their own component */}
+            <TouchableOpacity onPress={() => forgotAnswer()}>
+                <Text> Prev </Text> 
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => rememberAnswer()}>
+                <Text> Next </Text> 
+            </TouchableOpacity>
+
+        </View>
     );
 };
 
-const styles = StyleSheet.create({
-    previousBtnStyle: {
-        backgroundColor: 'red',
-        width: 100,
-    },
-    nextBtnStyle: {
-        backgroundColor: 'green',
-        width: 100,
-    }
-});
-
-export default StepIndicator;
+export default StepIndicatorFunction;

@@ -4,7 +4,8 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, Image, TouchableOpaci
 // import Animated from 'react-native-reanimated';
 import ContinueButton from '../components/ContinueButton';
 import FlipCard from '../components/FlipCard';
-import StepIndicator from '../components/ProgressSteps';
+import StepIndicatorFunction from '../components/StepIndicator';
+
 
 const StudyScreen = () => {
     const animate = useRef(new Animated.Value(0));
@@ -46,8 +47,9 @@ const StudyScreen = () => {
             {/* <Button onPress={handleFlip} title="Flip"/> */}
           </TouchableOpacity>
           <Text> See again in: </Text>
-          <StepIndicator/>
+          <StepIndicatorFunction/>
           <ContinueButton/>
+          
       </View>   
     );
 };
