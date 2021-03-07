@@ -9,17 +9,22 @@ type Props = {
 const FlipCard = ({question}) => {
     return (
     <View style={styles.card}> 
-        <Text> {question} </Text>
+        <Text style={styles.cardText}> Question: {question} </Text>
     </View>
     );
 }
 
 const styles = StyleSheet.create({
     card: {
-        width: 200,
-        height: 200,
+        marginTop: 10,
+        width: 330,
+        height: 330,
         backgroundColor: 'white',
         borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    cardText: {
     }
 });
 
