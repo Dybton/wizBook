@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Alert, View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {signIn} from '../../API/firebaseMethods'
 
 // import components
 import FormInput from '../components/FormInput';
@@ -10,6 +11,22 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const handlePress = () => {
+      if (!email) {
+        Alert.alert('Email field required')
+      }
+
+      if (!password) {
+        Alert.alert('Password field is required');
+      }
+
+    signIn(email, password);
+    setEmail('');
+    setPassword('');
+    navigation.navigate('Home')
+
+  };
     
     return (
         <View style={styles.container}>
@@ -37,7 +54,7 @@ const LoginScreen = ({ navigation }) => {
 
         <FormButton
             buttonTitle="Sign-in"
-            onPress={() => navigation.navigate('Home')}
+            onPress={handlePress}
         />
 
         <TouchableOpacity 
@@ -46,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
             <Text> Forgot Password </Text>
         </TouchableOpacity>
 
-         <SocialButton
+         {/* <SocialButton
             buttonTitle = "Sign in with Facebook"
             btnType = "facebook"
             color = "#4867aa"
@@ -60,7 +77,7 @@ const LoginScreen = ({ navigation }) => {
             color = "#de4d41"
             backgroundColor = "#f5e7ea"
             onPress={() => alert('Google!')}
-        />
+        /> */}
 
         <TouchableOpacity 
             style={styles.forgotButton}

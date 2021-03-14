@@ -7,7 +7,7 @@ import books from '../../data/bookData';
 
 
 const HomeScreen = ({ navigation }) => {
-    console.log(books)
+    // console.log(books)
 
     return (
         <View>
