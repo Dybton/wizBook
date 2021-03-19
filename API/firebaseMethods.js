@@ -22,6 +22,7 @@ export async function registration(email, password, firstName) {
   }
 }
 
+
 export async function signIn(email, password) {
   try {
    await firebase
@@ -32,6 +33,7 @@ export async function signIn(email, password) {
     Alert.alert("There is something wrong!", err.message);
   }
 }
+
 
 export async function loggingOut() {
   try {

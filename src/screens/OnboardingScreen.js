@@ -42,7 +42,6 @@ const OnboardingScreen = ({ navigation }) => {
 
 
 
-
 const styles = StyleSheet.create({});
 
 export default OnboardingScreen;

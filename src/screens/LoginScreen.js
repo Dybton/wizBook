@@ -25,7 +25,7 @@ const LoginScreen = ({ navigation }) => {
     setEmail('');
     setPassword('');
     navigation.navigate('Home')
-
+    
   };
     
     return (

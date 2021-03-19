@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, Alert, StyleSheet, TouchableOpacity, Keyboard, ScrollView, SafeAreaView, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Alert, StyleSheet, TouchableOpacity, Keyboard, ScrollView, SafeAreaView, TextInput} from 'react-native';
 import { registration } from '../../API/firebaseMethods'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // import components
 import FormInput from '../components/FormInput';
@@ -8,6 +9,7 @@ import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
+
 
 const SignUpScreen = ({ navigation }) => {
     const [firstName, setFirstName] = useState('')
@@ -21,6 +23,29 @@ const SignUpScreen = ({ navigation }) => {
       setPassword('');
       setConfirmPassword('');
     };
+
+    const save = async () => {
+      try {
+        await AsyncStorage.setItem("firstNameKey", firstName)
+      } catch (err) {
+        alert(err);
+      }
+    };
+
+    const load = async () => {
+      try {
+        let firstName = await AsyncStorage.getItem("firstNameKey")
+        if (firstName !== null) {
+          setFirstName(firstName);
+        }
+      } catch (err) {
+        alert(err);
+      }
+    };
+
+    useEffect (() => {
+        load();
+    }, [] );
 
     // I don't know what the one above is used for
     
@@ -49,7 +74,7 @@ const SignUpScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-          <Text> Create Account </Text>
+          <Text> {firstName} </Text>
 
           <FormInput
               value = {firstName}
@@ -111,7 +136,7 @@ const SignUpScreen = ({ navigation }) => {
               btnType = "facebook"
               color = "#4867aa"
               backgroundColor = "#e6eaf4"
-              onPress={() => alert('Facebook!')}
+              onPress={() => save()}
           />
 
           <SocialButton

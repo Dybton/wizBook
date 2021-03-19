@@ -4,8 +4,6 @@ import { Entypo } from '@expo/vector-icons';
 import Row from '../components/Row';
 import books from '../../data/bookData';
 
-
-
 const HomeScreen = ({ navigation }) => {
     // console.log(books)
 
