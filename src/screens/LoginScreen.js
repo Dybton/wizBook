@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import {signIn} from '../../API/firebaseMethods'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // import components
 import FormInput from '../components/FormInput';
@@ -12,20 +13,44 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+      const load = async () => {
+        try {
+          let email = await AsyncStorage.getItem("emailKey")
+          let password = await AsyncStorage.getItem("passwordKey")
+          if (email !== null) {
+            setEmail(email);
+          }
+          if (password !== null) {
+            setPassword(password);
+          }
+        } catch (err) {
+          alert(err);
+        }
+      };
+
+      useEffect (() => {
+          load();
+      }, [] );
+
+    // if (email && password) {
+    //   signIn(email, password);
+    //   navigation.navigate('Home')
+    // } 
+
     const handlePress = () => {
       if (!email) {
         Alert.alert('Email field required')
       }
-
       if (!password) {
         Alert.alert('Password field is required');
+      } else {
+        signIn(email, password);
+        navigation.navigate('Home')
+        
+        // setEmail('');
+        // setPassword('');
       }
 
-    signIn(email, password);
-    setEmail('');
-    setPassword('');
-    navigation.navigate('Home')
-    
   };
     
     return (
@@ -34,6 +59,7 @@ const LoginScreen = ({ navigation }) => {
             style={styles.logo} 
             />
         <Text style={styles.text}> Wizbooks </Text>
+        <Text> {email}, {password} </Text>
 
         <FormInput
             labelValue = {email}

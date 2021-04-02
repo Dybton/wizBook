@@ -26,7 +26,8 @@ const SignUpScreen = ({ navigation }) => {
 
     const save = async () => {
       try {
-        await AsyncStorage.setItem("firstNameKey", firstName)
+        await AsyncStorage.setItem("emailKey", email)
+        await AsyncStorage.setItem("passwordKey", password)
       } catch (err) {
         alert(err);
       }
@@ -34,10 +35,23 @@ const SignUpScreen = ({ navigation }) => {
 
     const load = async () => {
       try {
-        let firstName = await AsyncStorage.getItem("firstNameKey")
-        if (firstName !== null) {
-          setFirstName(firstName);
+        let email = await AsyncStorage.getItem("emailKey")
+        let password = await AsyncStorage.getItem("passwordKey")
+        if (email !== null) {
+          setEmail(email);
         }
+        if (password !== null) {
+          setPassword(password);
+        }
+      } catch (err) {
+        alert(err);
+      }
+    };
+
+    const remove = async () => {
+      try {
+        await AsyncStorage.setItem("emailKey", '')
+        await AsyncStorage.setItem("passwordKey", '')
       } catch (err) {
         alert(err);
       }
@@ -67,6 +81,7 @@ const SignUpScreen = ({ navigation }) => {
             password,
             firstName,
           );
+          save();
           navigation.navigate('Loading');
           emptyState();
         }
@@ -74,7 +89,7 @@ const SignUpScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-          <Text> {firstName} </Text>
+          <Text> {email}, {password} </Text>
 
           <FormInput
               value = {firstName}
@@ -136,7 +151,7 @@ const SignUpScreen = ({ navigation }) => {
               btnType = "facebook"
               color = "#4867aa"
               backgroundColor = "#e6eaf4"
-              onPress={() => save()}
+              onPress={() => remove()}
           />
 
           <SocialButton

@@ -22,7 +22,6 @@ export async function registration(email, password, firstName) {
   }
 }
 
-
 export async function signIn(email, password) {
   try {
    await firebase
