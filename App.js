@@ -69,7 +69,6 @@ const App = ({ navigation }) => {
   } else {if ( isFirstLaunch === null ) {
     return null;
   } else if (isFirstLaunch === true ) {
-    console.log('we run nr 1')
     return (
       <NavigationContainer>
         <OnboardingStack.Navigator initialRouteName={'Onboarding'}>
@@ -105,7 +104,6 @@ const App = ({ navigation }) => {
       </NavigationContainer>
     );
   } else { 
-  console.log('we run nr two')
   return (
   <NavigationContainer>
       <OnboardingStack.Navigator initialRouteName={'Login'}>
