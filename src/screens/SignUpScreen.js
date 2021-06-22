@@ -33,21 +33,6 @@ const SignUpScreen = ({ navigation }) => {
       }
     };
 
-    const load = async () => {
-      try {
-        let email = await AsyncStorage.getItem("emailKey")
-        let password = await AsyncStorage.getItem("passwordKey")
-        if (email !== null) {
-          setEmail(email);
-        }
-        if (password !== null) {
-          setPassword(password);
-        }
-      } catch (err) {
-        alert(err);
-      }
-    };
-
     const remove = async () => {
       try {
         await AsyncStorage.setItem("emailKey", '')
@@ -57,12 +42,6 @@ const SignUpScreen = ({ navigation }) => {
       }
     };
 
-    useEffect (() => {
-        load();
-    }, [] );
-
-    // I don't know what the one above is used for
-    
     const handlePress = () => {
         if (!firstName) {
           Alert.alert('First name  is required'); 

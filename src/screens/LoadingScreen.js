@@ -8,10 +8,10 @@ const LoadingScreen = ({ navigation }) => {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     navigation.replace('Home');
-                    // console.log(user)
                 } else {
-                    navigation.replace('SignUp')
+                    navigation.replace('Login')
                 }
+                console.log('now auth has changed')
             });
         }
     );

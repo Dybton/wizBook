@@ -2,6 +2,8 @@
 import * as firebase from "firebase";
 import "firebase/firestore";
 import {Alert} from "react-native";
+import React, { useState } from 'react';
+
 
 export async function registration(email, password, firstName) {
   try {
@@ -14,25 +16,25 @@ export async function registration(email, password, firstName) {
       .set({
         email: currentUser.email,
         firstName: firstName,
-      },
-      console.log(firstName)
-      );
+      });
   } catch (err) {
     Alert.alert("There is something wrong!", err.message);
   }
 }
 
 export async function signIn(email, password) {
+  // const [loginErr, setLoginErr] = useState('False')
+  let loginErr = false;
   try {
    await firebase
       .auth()
       .signInWithEmailAndPassword(email, password);
-      console.log(email)
   } catch (err) {
+    console.log('something wrongs')
     Alert.alert("There is something wrong!", err.message);
+    
   }
 }
-
 
 export async function loggingOut() {
   try {

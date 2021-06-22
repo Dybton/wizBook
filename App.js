@@ -7,8 +7,6 @@ import * as firebase from 'firebase';
 import apiKeys from './config/keys'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-
 import OnboardingScreen from './src/screens/OnboardingScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
@@ -56,7 +54,6 @@ const App = ({ navigation }) => {
           setIsFirstLaunch(false)
           console.log('not first launch')
           setStatusKeyLoaded(true)
-
         }
       });
     }, []);
@@ -106,12 +103,12 @@ const App = ({ navigation }) => {
   } else { 
   return (
   <NavigationContainer>
-      <OnboardingStack.Navigator initialRouteName={'Login'}>
+      <OnboardingStack.Navigator initialRouteName={'Login'} screenOptions={{ animationEnabled: false, headerShown: false }}>
         <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />
         <OnboardingStack.Screen
           name="Login"
           component={LoginScreen}
-          options={{ header: () => null }}
+          options={{ header: () => null}}
         />
         <OnboardingStack.Screen
           name='SignUp'
@@ -161,12 +158,12 @@ const AppTabsScreen = () => (
       name="Study"
       component={StudyStackScreen}
       options={{
+        headerShown: false,
         tabBarIcon: (props) => (
           <Ionicons
             name="ios-checkmark-circle-outline"
             size={props.size}
             color={props.color}
-
           />
         ),
       }}
@@ -180,7 +177,6 @@ const AppTabsScreen = () => (
             name="ios-checkmark-circle-outline"
             size={props.size}
             color={props.color}
-
           />
         ),
       }}
@@ -205,7 +201,7 @@ function HomeStackScreen() {
 const StudyStack = createStackNavigator();
 function StudyStackScreen() {
   return (
-    <StudyStack.Navigator>
+    <StudyStack.Navigator screenOptions={{ animationEnabled: false, headerShown: false }}>
       <StudyStack.Screen name="SpecifyProgress" component={ProgressScreen} />
       <StudyStack.Screen name="StudyQuestions" component={StudyScreen} />
     </StudyStack.Navigator>
@@ -216,8 +212,6 @@ export default App;
 
 
 
-
- 
 // const remove = async () => {
   //   try {
   //     await AsyncStorage.removeItem('alreadyLaunched')

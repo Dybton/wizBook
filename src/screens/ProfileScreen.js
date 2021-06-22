@@ -32,12 +32,12 @@ const [firstName, setFirstName] = useState('');
 
     const handlePress = (doc) => {
         loggingOut();
-        navigation.replace('Home')
+        navigation.replace('Login')
         console.log(doc.firstName)
     }
 
     return (
-        <View>
+        <View style={styles.container}>
           <Text> Hi {firstName} </Text>
           <TouchableOpacity onPress={handlePress}>
             <Text> Log out </Text>
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     },
     container: {
         justifyContent: 'center',
+        marginTop: 75,
         // borderColor: 'blue',
         // borderWidth: 3,
         alignItems: 'center'

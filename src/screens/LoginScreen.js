@@ -12,7 +12,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
       const load = async () => {
         try {
           let email = await AsyncStorage.getItem("emailKey")
@@ -25,32 +24,25 @@ const LoginScreen = ({ navigation }) => {
           }
         } catch (err) {
           alert(err);
-        }
+        };
       };
 
       useEffect (() => {
           load();
       }, [] );
 
-    // if (email && password) {
-    //   signIn(email, password);
-    //   navigation.navigate('Home')
-    // } 
 
-    const handlePress = () => {
+    const handlePress = async () => {
       if (!email) {
         Alert.alert('Email field required')
-      }
+      };
       if (!password) {
         Alert.alert('Password field is required');
-      } else {
-        signIn(email, password);
-        navigation.navigate('Home')
-        
-        // setEmail('');
-        // setPassword('');
-      }
-
+      };
+      await signIn(email, password);
+      navigation.navigate('Loading')
+      // setEmail('');
+      // setPassword('');
   };
     
     return (
@@ -70,6 +62,7 @@ const LoginScreen = ({ navigation }) => {
             autoCapitalize='none'
             autoCorrect={false}
         />
+
         <FormInput
             labelValue = {password}
             onChangeText = {(userPassword) => setPassword(userPassword)}
@@ -80,7 +73,7 @@ const LoginScreen = ({ navigation }) => {
 
         <FormButton
             buttonTitle="Sign-in"
-            onPress={handlePress}
+            onPress={handlePress}  
         />
 
         <TouchableOpacity 
@@ -108,14 +101,11 @@ const LoginScreen = ({ navigation }) => {
         <TouchableOpacity 
             style={styles.forgotButton}
             onPress={() => navigation.navigate('SignUp')}
+            
         >
             <Text style={styles.navButtonText}> Don't have an account? </Text>
         </TouchableOpacity>
-
-       
-
         
-
         </View>
     );
 }
