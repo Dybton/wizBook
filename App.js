@@ -16,6 +16,8 @@ import StudyScreen from './src/screens/StudyScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import ProgressScreen from './src/screens/ProgressScreen';
 import BookDetailScreen from './src/screens/BookDetailScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
+
 import { set } from 'react-native-reanimated';
 
 
@@ -127,6 +129,11 @@ const App = ({ navigation }) => {
           component={AppTabsScreen}
           options={{ headerShown: false }}
         />
+        <OnboardingStack.Screen
+            name={'ForgotPassword'}
+            component={ForgotPasswordScreen}
+            options={{ headerShown: false }}
+          />
         <OnboardingStack.Screen
           name={'Loading'}
           component={LoadingScreen}
