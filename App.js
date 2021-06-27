@@ -132,7 +132,7 @@ const App = ({ navigation }) => {
         <OnboardingStack.Screen
             name={'ForgotPassword'}
             component={ForgotPasswordScreen}
-            options={{ headerShown: false }}
+            options={{ headerShown: true }}
           />
         <OnboardingStack.Screen
           name={'Loading'}

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { Alert, View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import {signIn} from '../../API/firebaseMethods'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -31,6 +32,22 @@ const LoginScreen = ({ navigation }) => {
           load();
       }, [] );
 
+      // useFocusEffect(
+      //   React.useCallback(() => {
+      //     alert('Enter');
+      //     load();
+      //     setPassword('');
+      //   }, [])
+      // );
+    
+      const save = async () => {
+        try {
+          await AsyncStorage.setItem("emailKey", email)
+          await AsyncStorage.setItem("passwordKey", password)
+        } catch (err) {
+          alert(err);
+        }
+      };
 
     const handlePress = async () => {
       if (!email) {
@@ -41,9 +58,15 @@ const LoginScreen = ({ navigation }) => {
       };
       await signIn(email, password);
       navigation.navigate('Loading')
-      // setEmail('');
-      // setPassword('');
-  };
+      save();
+
+    };
+
+  //   const handleRefresh = async () => {
+  //     load();
+  //     setEmail(email)
+  //     setPassword(password)
+  // };
     
     return (
         <View style={styles.container}>
@@ -108,7 +131,7 @@ const LoginScreen = ({ navigation }) => {
         
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

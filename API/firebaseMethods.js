@@ -43,3 +43,20 @@ export async function loggingOut() {
     Alert.alert('There is something wrong!', err.message);
   }
 }
+
+export async function forgotPassword (email) {
+  try {
+    await firebase.auth().sendPasswordResetEmail(email)
+    alert('Please check your email...')
+  } catch (err) {
+    Alert.alert('There is something wrong!', err.message);
+  }
+}
+
+  // firebase.auth().sendPasswordResetEmail(email)
+  //   .then(function (user) {
+  //     alert('Please check your email...')
+  //   }).catch(function (e) {
+  //     console.log(e)
+  //   })
+  // console.log(email)
