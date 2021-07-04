@@ -53,10 +53,4 @@ export async function forgotPassword (email) {
   }
 }
 
-  // firebase.auth().sendPasswordResetEmail(email)
-  //   .then(function (user) {
-  //     alert('Please check your email...')
-  //   }).catch(function (e) {
-  //     console.log(e)
-  //   })
-  // console.log(email)
+

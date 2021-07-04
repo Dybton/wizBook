@@ -1,3 +1,7 @@
+import * as firebase from 'firebase'
+import 'firebase/firestore';
+
+const books1 = firestore().collection('Books');
 
 const books = [
     {name: 'Sapiens', author: 'Yuval Noah Harrari'},
@@ -5,6 +9,10 @@ const books = [
     {name: 'Antifragile', author: 'Nassim Taleb'},
     {name: 'Language', author: 'Stupid'}
     ];
+
+    // It's here we need to import the stuff from fb
+
+
     // {
     // title: 'Sapiens',
     // subtitle: 'A Brief History of Humankind',
