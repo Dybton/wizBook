@@ -4,6 +4,20 @@ import "firebase/firestore";
 import {Alert} from "react-native";
 import React, { useState } from 'react';
 
+const firebaseConfig = { // note we need to use neuvormnet varaibles before putting it into prod - see instagram clone 42
+  apiKey: 'api-key',
+  authDomain: 'project-id.firebaseapp.com',
+  databaseURL: 'https://project-id.firebaseio.com',
+  projectId: 'project-id',
+  storageBucket: 'project-id.appspot.com',
+  messagingSenderId: 'sender-id',
+  appId: 'app-id',
+  measurementId: 'G-measurement-id',
+};
+
+const db = firebase.firestore()
+
+// const books1 = firestore().collection('Books');
 
 export async function registration(email, password, firstName) {
   try {

@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import * as firebase from 'firebase';
+
 import apiKeys from './config/keys'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -33,17 +34,6 @@ const App = ({ navigation }) => {
   
   const [isFirstLaunch, setIsFirstLaunch] = useState('')
   const [statusKeyLoaded, setStatusKeyLoaded] = useState(false)
-
-
-  // const remove = async () => {
-  //   try {
-  //     await AsyncStorage.removeItem('alreadyLaunched')
-  //   } catch (err) {
-  //     alert(err)
-  //   } finally {
-  //     setIsFirstLaunch('')
-  //   }
-  // }; remove()
 
   useEffect(() => {
       AsyncStorage.getItem('alreadyLaunched').then(value => {
@@ -216,68 +206,3 @@ function StudyStackScreen() {
 }
 
 export default App;
-
-
-
-// const remove = async () => {
-  //   try {
-  //     await AsyncStorage.removeItem('alreadyLaunched')
-  //   } catch (err) {
-  //     alert(err)
-  //   } finally {
-  //     setIsFirstLaunch('')
-  //   }
-  // }; remove()
-
-
-  // This code below works and can be used to check if it's the first time a user has logged in.
-
-// const [isFirstLaunch, setIsFirstLaunch] = useState('')
-
-
-//   const save = async () => {
-//       try {
-//         await AsyncStorage.setItem('isFirstLaunchKey', isFirstLaunch)
-//       } catch(err) {
-//         alert(err);
-//       }
-//   };
-
-//   const load = async () => {
-//     try {
-//       let key = await AsyncStorage.getItem('isFirstLaunchKey')
-//       if (key === null) {
-//         console.log('first launch and key is ' + key)
-//         console.log('isFirstLaunch state is ' + isFirstLaunch)
-//         setIsFirstLaunch(false)
-//         save();
-//       } else {
-//         console.log('not first launch')
-//         save();
-//       }
-//     } catch(err) {
-//       alert(err);
-//     }
-//   }
-
-//   useEffect(() => {
-//     load()
-//   }, [])
-
-
-
-
-     // The one from the indian dude 
-
-    // useEffect(() => {
-  //   AsyncStorage.getItem('alreadyLaunched').then(value => {
-  //     if(value == null) {
-  //       AsyncStorage.setItem('alreadyLaunched', 'true')
-  //       setIsFirstLaunch(true);
-  //       console.log('first launch')
-  //     } else {
-  //       setIsFirstLaunch(false)
-  //       console.log('not first launch')
-  //     }
-  //   });
-  // }, []);
