@@ -3,7 +3,23 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import * as firebase from 'firebase';
+
+// Firebase
+import firebase from 'firebase/app' 
+import 'firebase/firestore'
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAWxCFIst-OWvbmTm5BBQPc7M8Adq_OeOo",
+    authDomain: "react-native-chat-fd3bf.firebaseapp.com",
+    projectId: "react-native-chat-fd3bf",
+    storageBucket: "react-native-chat-fd3bf.appspot.com",
+    messagingSenderId: "225514317181",
+    appId: "1:225514317181:web:a63cefca6dc7ccb02f9814"
+  };
+
+// if (firebase.apps.length === 0 ) {
+//     firebase.initializeApp(firebaseConfig,);
+// }
 
 import apiKeys from './config/keys'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,9 +40,7 @@ import { set } from 'react-native-reanimated';
 
 const OnboardingStack = createStackNavigator();
 
-
 const App = ({ navigation }) => {
-
   if (!firebase.apps.length) {
     console.log('Connected with Firebase')
     firebase.initializeApp(apiKeys.firebaseConfig);
@@ -50,7 +64,6 @@ const App = ({ navigation }) => {
       });
     }, []);
   
-
   if ( statusKeyLoaded === false ) {
     return (
       null 
