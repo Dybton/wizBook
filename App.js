@@ -17,10 +17,6 @@ const firebaseConfig = {
     appId: "1:225514317181:web:a63cefca6dc7ccb02f9814"
   };
 
-// if (firebase.apps.length === 0 ) {
-//     firebase.initializeApp(firebaseConfig,);
-// }
-
 import apiKeys from './config/keys'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -45,6 +41,23 @@ const App = ({ navigation }) => {
     console.log('Connected with Firebase')
     firebase.initializeApp(apiKeys.firebaseConfig);
   }
+
+  //Getting the books from firebase
+  const [books, setBooks] = useState([]);
+  const db = firebase.firestore()
+
+  useEffect(() => {
+    db.collection('Books').onSnapshot(snapshot => (
+      setBooks(snapshot.docs.map(doc => doc.data()))
+    ))
+  }, [])
+
+  console.log(books)
+  // So what we need is to pass books to home.
+  // One way to do so, is via navigation
+
+
+// Async
   
   const [isFirstLaunch, setIsFirstLaunch] = useState('')
   const [statusKeyLoaded, setStatusKeyLoaded] = useState(false)
@@ -72,6 +85,9 @@ const App = ({ navigation }) => {
     return null;
   } else if (isFirstLaunch === true ) {
     return (
+
+      // NAVIGATION
+
       <NavigationContainer>
         <OnboardingStack.Navigator initialRouteName={'Onboarding'}>
           <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />

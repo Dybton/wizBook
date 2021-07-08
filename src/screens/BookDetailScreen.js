@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, Button} from 'react-native';
+import { booksRef } from '../../API/firebaseMethods'
 
 const BookDetail = ({ navigation, route }) => {
     const book = route.params.book;
@@ -7,7 +8,8 @@ const BookDetail = ({ navigation, route }) => {
     return <View>
         <Text> Title: {book.name} </Text>
         <Text> Title: {book.author} </Text>
-        <Button title='Choose book' onPress={() => navigation.goBack()} />
+        {/* <Button title='Choose book' onPress={() => navigation.goBack()} /> */}
+        <Button title='Choose book' onPress={() => console.log(booksRef)} />
     </View>
 };
 
