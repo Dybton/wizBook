@@ -6,8 +6,10 @@ const BookDetail = ({ navigation, route }) => {
     const book = route.params.book;
 
     return <View>
-        <Text> Title: {book.name} </Text>
-        <Text> Title: {book.author} </Text>
+        <Text> Title: {book.title} </Text>
+        <Text> Subtitle: {book.subtitle} </Text>
+        <Text> Author: {book.author} </Text>
+        <Text> Pages: {book.pageNr} </Text>
         {/* <Button title='Choose book' onPress={() => navigation.goBack()} /> */}
         <Button title='Choose book' onPress={() => console.log(booksRef)} />
     </View>

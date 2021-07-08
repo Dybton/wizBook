@@ -4,19 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-// Firebase
-import firebase from 'firebase/app' 
-import 'firebase/firestore'
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAWxCFIst-OWvbmTm5BBQPc7M8Adq_OeOo",
-    authDomain: "react-native-chat-fd3bf.firebaseapp.com",
-    projectId: "react-native-chat-fd3bf",
-    storageBucket: "react-native-chat-fd3bf.appspot.com",
-    messagingSenderId: "225514317181",
-    appId: "1:225514317181:web:a63cefca6dc7ccb02f9814"
-  };
-
 import apiKeys from './config/keys'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -33,32 +20,35 @@ import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 
 import { set } from 'react-native-reanimated';
 
-
 const OnboardingStack = createStackNavigator();
 
+// Firebase
+import firebase from 'firebase/app' 
+import 'firebase/firestore'
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAWxCFIst-OWvbmTm5BBQPc7M8Adq_OeOo",
+    authDomain: "react-native-chat-fd3bf.firebaseapp.com",
+    projectId: "react-native-chat-fd3bf",
+    storageBucket: "react-native-chat-fd3bf.appspot.com",
+    messagingSenderId: "225514317181",
+    appId: "1:225514317181:web:a63cefca6dc7ccb02f9814"
+  };
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+  console.log('Connected with Firebase')
+  firebase.initializeApp(apiKeys.firebaseConfig);
+}
+
+const db = firebase.firestore()
+const booksRef = db.collection('Books')
+
+export { booksRef }
+
 const App = ({ navigation }) => {
-  if (!firebase.apps.length) {
-    console.log('Connected with Firebase')
-    firebase.initializeApp(apiKeys.firebaseConfig);
-  }
-
-  //Getting the books from firebase
-  const [books, setBooks] = useState([]);
-  const db = firebase.firestore()
-
-  useEffect(() => {
-    db.collection('Books').onSnapshot(snapshot => (
-      setBooks(snapshot.docs.map(doc => doc.data()))
-    ))
-  }, [])
-
-  console.log(books)
-  // So what we need is to pass books to home.
-  // One way to do so, is via navigation
-
 
 // Async
-  
   const [isFirstLaunch, setIsFirstLaunch] = useState('')
   const [statusKeyLoaded, setStatusKeyLoaded] = useState(false)
 

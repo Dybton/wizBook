@@ -1,10 +1,12 @@
 import {Alert} from "react-native";
 import React, { useState } from 'react';
+
+// Firebase
 import firebase from 'firebase/app' 
 import 'firebase/firestore'
- 
-const firebaseConfig = { // note we need to use neuvormnet varaibles before putting it into prod - see instagram clone 42
-    apiKey: "AIzaSyAWxCFIst-OWvbmTm5BBQPc7M8Adq_OeOo",
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAWxCFIst-OWvbmTm5BBQPc7M8Adq_OeOo", // note we need to use neuvormnet varaibles before putting it into prod - see instagram clone 42
     authDomain: "react-native-chat-fd3bf.firebaseapp.com",
     projectId: "react-native-chat-fd3bf",
     storageBucket: "react-native-chat-fd3bf.appspot.com",
@@ -12,10 +14,17 @@ const firebaseConfig = { // note we need to use neuvormnet varaibles before putt
     appId: "1:225514317181:web:a63cefca6dc7ccb02f9814"
   };
 
+// // Initialize FB
+// if (firebase.apps.length === 0 ) {
+//   firebase.initializeApp(firebaseConfig);
+// }
+
+// //Getting the books from firebase
 // const db = firebase.firestore()
 // const booksRef = db.collection('Books')
 
 // export { booksRef }
+
 
 export async function registration(email, password, firstName) {
   try {

@@ -3,7 +3,7 @@ import {View, Image, Text, StyleSheet } from 'react-native';
 
 const BookComponent = ({result}) => {
     return <View style={styles.myBook}>
-        <Text> Title: {result.name} </Text>
+        <Text> Title: {result.title} </Text>
         <Text> Author: {result.author} </Text>
     </View>
 };

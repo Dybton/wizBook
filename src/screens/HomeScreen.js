@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import Row from '../components/Row';
-import books from '../../data/bookData';
+import { booksRef } from '../../App';
 
 const HomeScreen = ({ navigation }) => {
-    // console.log(books)
+    const [books, setBooks] = useState([]);
+ 
+  useEffect(() => {
+    booksRef.onSnapshot(snapshot => (
+      setBooks(snapshot.docs.map(doc => doc.data()))
+    ))
+  }, [])
+
+  console.l
 
     return (
         <View>
