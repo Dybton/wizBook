@@ -17,7 +17,6 @@ const ProfileScreen = ({ navigation }) => {
   const [firstName, setFirstName] = useState('');
   const [userBooks, setUserBooks] = useState([]);
 
-
       // First function
       useEffect(() => {
           
