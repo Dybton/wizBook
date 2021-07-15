@@ -9,9 +9,12 @@ const HomeScreen = ({ navigation }) => {
  
   useEffect(() => {
     booksRef.onSnapshot(snapshot => (
-      setBooks(snapshot.docs.map(doc => doc.data()))
+      setBooks(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
     ))
   }, [])
+
+
+  console.log(books)
 
     return (
         <View>
