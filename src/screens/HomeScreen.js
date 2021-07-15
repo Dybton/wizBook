@@ -13,8 +13,6 @@ const HomeScreen = ({ navigation }) => {
     ))
   }, [])
 
-  console.l
-
     return (
         <View>
             <View style={styles.container}>
