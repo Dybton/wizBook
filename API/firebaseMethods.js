@@ -37,6 +37,7 @@ export async function registration(email, password, firstName) {
       .set({
         email: currentUser.email,
         firstName: firstName,
+        books: []
       });
   } catch (err) {
     Alert.alert("There is something wrong!", err.message);

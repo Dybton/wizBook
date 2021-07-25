@@ -7,7 +7,7 @@ const ProgressScreen = ({ navigation }) => {
 
     return (
       <View style={styles.container}>
-          <Text> How far have you reado?  </Text>
+          <Text> How far have you read?  </Text>
           <View>
             <WheelPicker/> 
             {/* <WheelPicker/>  */}

@@ -34,7 +34,7 @@ const FlipComponent = () => {
                 <View style={styles.container}>
                         <Animated.View style={[{ transform: [{ rotateY: interpolateFront}]}, styles.hidden]}>
                         <FlipCard 
-                            question="Hvad spiser katten??"
+                            question="Hvad spiser hunden??"
                         />
                         </Animated.View>
                         <Animated.View style={[{ transform: [{ rotateY: interpolateBack}]}, styles.hidden, styles.back]}> 

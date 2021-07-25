@@ -43,9 +43,11 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore()
 const booksRef = db.collection('Books')
-const userRef = db.collection('users')
+const usersRef = db.collection('users')
+const cardsRef = db.collection('Cards')
+const userCardRef = db.collection('user_cards')
 
-export { booksRef, userRef}
+export { booksRef, usersRef, cardsRef, userCardRef }
 
 const App = ({ navigation }) => {
 
