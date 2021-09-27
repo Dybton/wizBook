@@ -7,71 +7,55 @@ import 'firebase/firestore'
 
 import Row from '../components/Row';
 
-import { booksRef, usersRef} from '../../App';
+import { booksRef} from '../../App';
 
 const ProfileScreen = ({ navigation }) => {
   const currentUserUID = firebase.auth().currentUser.uid;
   const [firstName, setFirstName] = useState('');
+  const [userBookTitles, setUserBookTitles] = useState([]);
   const [userBooks, setUserBooks] = useState([]);
-
-  useEffect(() => {
-    // get the user object using the currentUserId
+  const [loading, setLoading] = useState(true);
   
-      usersRef.doc(currentUserUID).get().then((doc) => {
-      if (doc.exists) {
-          helperFunc(doc.data().books);
-          setUserBooks(doc.data().books);
-          console.log('the userbooks are ' + userBooks)
+  useEffect(() => {
+    async function getUserInfo(){
+      let doc = await firebase
+      .firestore()
+      .collection('users')
+      .doc(currentUserUID)
+      .get();
+      
+      if (!doc.exists){
+        Alert.alert('No user data found!')
       } else {
-          console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
-    
-
-    // What I want is an array with all the books that the user has
-    const helperFunc = (bookArray) => {
-      booksRef.where("title", 'in', bookArray).onSnapshot(snapshot => (
-        (snapshot.docs.map(doc => doc.data()))
-        //NA it seems this helper function get's the titles but it DOESN'T return anything!!' - fix this
-      ))
-    };
+        let dataObj = doc.data();
+        setFirstName(dataObj.firstName)
+        setUserBookTitles(dataObj.books)
+        booksRef.where("title", "in", dataObj.books).onSnapshot(snapshot => (
+          setUserBooks(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
+          ))
+      }
+    }
+    getUserInfo();
+    setLoading(false)
   }, [])
 
-  // https://medium.com/techwasti/firestore-now-supports-in-queries-array-contains-956031f753d4 - cont from here
+  useEffect(() => {
+    async function getUserBooks() {
+    booksRef.where("title", "in", userBookTitles).onSnapshot(snapshot => (
+    setUserBooks(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
+    ))
+  }
+  getUserBooks()
+  }, [])
 
-// NA: query the books using the users array of books from the above
-// So currently i'm only getting the titles of the books - but I need to get the entire object! Thats the next goal
-
-
-      // First function
-      useEffect(() => {
-          
-          async function getUserInfo(){
-            let doc = await firebase
-            .firestore()
-            .collection('users')
-            .doc(currentUserUID)
-            .get();
       
-            if (!doc.exists){
-              Alert.alert('No user data found!')
-            } else {
-              let dataObj = doc.data();
-              setFirstName(dataObj.firstName)
-            }
-          }
-          getUserInfo();
-        }, [])
-    
-      
-      // Don't know what this is
+      // Function that handles navigation back to login on logout
       const handlePress = (doc) => {
           loggingOut();
           navigation.replace('Login')
       }
 
+      if (!loading) {
       return (
           <View style={styles.container}>
             <Text> Hi {firstName} </Text>
@@ -84,6 +68,13 @@ const ProfileScreen = ({ navigation }) => {
             />
           </View>
       );  
+    } else { 
+      return (
+        <View style={styles.container}>
+          <Text> Test </Text>
+        </View>
+    );
+    }
   };
 
 const styles = StyleSheet.create({
@@ -105,3 +96,31 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileScreen;
+
+
+
+
+// useEffect(() => {
+//   // get the user object using the currentUserId
+
+//     usersRef.doc(currentUserUID).get().then((doc) => {
+//     if (doc.exists) {
+//         helperFunc(doc.data().books);
+//         setUserBooks(doc.data().books);
+//         console.log('the userbooks are ' + userBooks)
+//     } else {
+//         console.log("No such document!");
+//       }
+//   }).catch((error) => {
+//       console.log("Error getting document:", error);
+//   });
+  
+
+//   // What I want is an array with all the books that the user has
+//   const helperFunc = (bookArray) => {
+//     booksRef.where("title", 'in', bookArray).onSnapshot(snapshot => (
+//       (snapshot.docs.map(doc => doc.data()))
+//       //NA it seems this helper function get's the titles but it DOESN'T return anything!!' - fix this
+//     ))
+//   };
+// }, [])
