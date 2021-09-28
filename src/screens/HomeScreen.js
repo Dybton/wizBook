@@ -13,7 +13,6 @@ const HomeScreen = ({ navigation }) => {
     ))
   }, [])
 
-
   console.log(books)
 
     return (
