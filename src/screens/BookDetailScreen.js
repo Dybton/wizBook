@@ -7,8 +7,15 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 const BookDetail = ({ navigation, route }) => {
-    const book = route.params.book;
     const currentUserUID = firebase.auth().currentUser.uid;
+    const book = route.params.book;
+
+    // As a user, when I need to go to the book, press choose book, and the book should then be on my profile page. 
+    // If we press choose book, the title of that book will be added to the users books array. 
+    // To do this, I need the user object, I need the book title, and I need a way to push a value to the user.books.array
+
+    
+
 
 
     // On choose book book should be added to the user's array called books
@@ -20,10 +27,11 @@ const BookDetail = ({ navigation, route }) => {
     const AddBook = () => {
         booksRef.doc(book.id).update({
             title: 'Sapiens',
-            users: firebase.firestore.FieldValue.arrayUnion(currentUserUID)
+            
+            // users: firebase.firestore.FieldValue.arrayUnion(currentUserUID)
         });
+        console.log(currentUserUID)
         // Function should only fire on choose book
-        console.log('yay')
     };
 
     return <View>
