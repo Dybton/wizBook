@@ -12,9 +12,7 @@ const HomeScreen = ({ navigation }) => {
       setBooks(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
     ))
   }, [])
-
-  console.log(books)
-
+  
     return (
         <View>
             <View style={styles.container}>

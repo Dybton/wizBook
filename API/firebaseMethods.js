@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 // Firebase
 import firebase from 'firebase/app' 
 import 'firebase/firestore'
+import { isRequired } from "react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAWxCFIst-OWvbmTm5BBQPc7M8Adq_OeOo", // note we need to use neuvormnet varaibles before putting it into prod - see instagram clone 42
@@ -13,18 +14,6 @@ const firebaseConfig = {
     messagingSenderId: "225514317181",
     appId: "1:225514317181:web:a63cefca6dc7ccb02f9814"
   };
-
-// // Initialize FB
-// if (firebase.apps.length === 0 ) {
-//   firebase.initializeApp(firebaseConfig);
-// }
-
-// //Getting the books from firebase
-// const db = firebase.firestore()
-// const booksRef = db.collection('Books')
-
-// export { booksRef }
-
 
 export async function registration(email, password, firstName) {
   try {
@@ -75,4 +64,12 @@ export async function forgotPassword (email) {
   }
 }
 
-
+export async function getUser(currentUser) {
+  try {
+    const db = await firebase.firestore();
+    const user = db.collection("users").doc(currentUser).get();
+    return user;
+  } catch (err) {
+    Alert.alert("There is something wrong!", err.message);
+  }
+}

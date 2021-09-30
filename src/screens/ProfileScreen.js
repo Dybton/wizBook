@@ -7,15 +7,16 @@ import 'firebase/firestore'
 
 import Row from '../components/Row';
 
-import { booksRef} from '../../App';
+import { booksRef, usersRef} from '../../App';
 
 const ProfileScreen = ({ navigation }) => {
   const currentUserUID = firebase.auth().currentUser.uid;
   const [firstName, setFirstName] = useState('');
   const [userBookTitles, setUserBookTitles] = useState([]);
   const [userBooks, setUserBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
   
+
+  // I need to change this into a real time listener
   useEffect(() => {
     async function getUserInfo(){
       let doc = await firebase
@@ -36,7 +37,6 @@ const ProfileScreen = ({ navigation }) => {
       }
     }
     getUserInfo();
-    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -47,7 +47,6 @@ const ProfileScreen = ({ navigation }) => {
   }
   getUserBooks()
   }, [])
-
       
       // Function that handles navigation back to login on logout
       const handlePress = (doc) => {
@@ -55,7 +54,7 @@ const ProfileScreen = ({ navigation }) => {
           navigation.replace('Login')
       }
 
-      if (!loading) {
+      
       return (
           <View style={styles.container}>
             <Text> Hi {firstName} </Text>
@@ -67,14 +66,7 @@ const ProfileScreen = ({ navigation }) => {
                     books={userBooks}
             />
           </View>
-      );  
-    } else { 
-      return (
-        <View style={styles.container}>
-          <Text> Test </Text>
-        </View>
-    );
-    }
+      ); 
   };
 
 const styles = StyleSheet.create({

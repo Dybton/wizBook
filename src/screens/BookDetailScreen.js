@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Image, Text, StyleSheet, Button} from 'react-native';
-import { booksRef } from '../../App'
+import { booksRef, usersRef } from '../../App'
+import {getUser} from '../../API/firebaseMethods'
 
 // Firebase
 import firebase from 'firebase/app' 
@@ -10,28 +11,10 @@ const BookDetail = ({ navigation, route }) => {
     const currentUserUID = firebase.auth().currentUser.uid;
     const book = route.params.book;
 
-    // As a user, when I need to go to the book, press choose book, and the book should then be on my profile page. 
-    // If we press choose book, the title of that book will be added to the users books array. 
-    // To do this, I need the user object, I need the book title, and I need a way to push a value to the user.books.array
-
-    
-
-
-
-    // On choose book book should be added to the user's array called books
-    // What info do we need?
-        // We need the user id/name
-        // ad
-
-
     const AddBook = () => {
-        booksRef.doc(book.id).update({
-            title: 'Sapiens',
-            
-            // users: firebase.firestore.FieldValue.arrayUnion(currentUserUID)
-        });
-        console.log(currentUserUID)
-        // Function should only fire on choose book
+        usersRef.doc(currentUserUID).update({
+            books: firebase.firestore.FieldValue.arrayUnion(book.title)
+        })
     };
 
     return <View>
