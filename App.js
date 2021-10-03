@@ -46,8 +46,9 @@ const booksRef = db.collection('Books')
 const usersRef = db.collection('users')
 const cardsRef = db.collection('Cards')
 const userCardRef = db.collection('user_cards')
+const userBookCollection = db.collection('User_Book_Collection')
 
-export { booksRef, usersRef, cardsRef, userCardRef }
+export { booksRef, usersRef, cardsRef, userCardRef, userBookCollection }
 
 const App = ({ navigation }) => {
 

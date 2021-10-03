@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 
 import {loggingOut} from '../../API/firebaseMethods';
-import firebase from 'firebase/app' 
+import firebase, { firestore } from 'firebase/app' 
 import 'firebase/firestore'
 
 import Row from '../components/Row';
 
-import { booksRef, usersRef} from '../../App';
+import { booksRef, userBookCollection} from '../../App';
 
 const ProfileScreen = ({ navigation }) => {
   const currentUserUID = firebase.auth().currentUser.uid;
@@ -17,6 +17,49 @@ const ProfileScreen = ({ navigation }) => {
   
 
   // I need to change this into a real time listener
+  // See this https://www.youtube.com/watch?v=QaYts9sPmcY&t=9153s&ab_channel=SonnySangha
+  // Try to use it to assign userBookTItles 
+
+  // useEffect(() => {
+  //   userBookCollection.onSnapshot(snapshot => (
+  //     setUserBookTitles(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
+  //   ))
+  //   console.log(userBookTitles.id)
+  // }, [])
+
+  
+
+//   useEffect(()=> {
+//     userBookCollection.doc(currentUserUID+"_Book_Collection").onSnapshot((snapshot) =>
+//           snapshot.docs.map((doc) => ({
+//             data: doc.data(),
+//           }))
+//     )
+// }, []);
+
+  // useEffect(() => {
+  //   async function getUserBookTitles() {
+  //     firestore().collection('users').doc(currentUserUID).onSnapshot(snapshot => (
+  //       setUserBookTitles(snapshot.docs.)
+  //     ))
+  //   }
+  // })
+
+//   async function getUserInfo(){
+//     await firebase
+//     .firestore()
+//     .collection('users')
+//     .doc(currentUserUID)
+//     .onSnapshot(snapshot => (
+//       setUserObject(snapshot.docs.map(doc => (
+//         {
+//           dataObj: doc.data()
+//         }
+//       ))
+// }
+
+
+  // I need to change this into a real time listener.
   useEffect(() => {
     async function getUserInfo(){
       let doc = await firebase
@@ -30,7 +73,7 @@ const ProfileScreen = ({ navigation }) => {
       } else {
         let dataObj = doc.data();
         setFirstName(dataObj.firstName)
-        setUserBookTitles(dataObj.books)
+        // setUserBookTitles(dataObj.books)
         booksRef.where("title", "in", dataObj.books).onSnapshot(snapshot => (
           setUserBooks(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
           ))
@@ -39,15 +82,6 @@ const ProfileScreen = ({ navigation }) => {
     getUserInfo();
   }, [])
 
-  useEffect(() => {
-    async function getUserBooks() {
-    booksRef.where("title", "in", userBookTitles).onSnapshot(snapshot => (
-    setUserBooks(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
-    ))
-  }
-  getUserBooks()
-  }, [])
-      
       // Function that handles navigation back to login on logout
       const handlePress = (doc) => {
           loggingOut();
