@@ -5,7 +5,7 @@ import Row from '../components/Row';
 import { booksRef } from '../../App';
 
 const HomeScreen = ({ navigation }) => {
-    const [books, setBooks] = useState([]);
+const [books, setBooks] = useState([]);
  
   useEffect(() => {
     booksRef.onSnapshot(snapshot => (

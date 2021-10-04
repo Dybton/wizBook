@@ -4,9 +4,17 @@ import { View, Text } from 'react-native';
 import Picker from '@gregfrench/react-native-wheel-picker'
 var PickerItem = Picker.Item;
 
-const WheelPicker = () => {
-  const [selectedItem, setSelectedItem ] = useState(2);
-  const [itemList , setItemList ] = useState(['Page nr', '%', 'Page 3', 'Page 4', 'Page 5']);
+const WheelPicker = ({pages, currentProgress}) => {
+  const [selectedItem, setSelectedItem ] = useState(currentProgress);
+  // take in a number and output an array between 
+
+  const test = [];
+  for (let i = 1; i <= pages; i++) {
+    test.push(i.toString())
+  }
+  console.log(test);
+
+  const [itemList , setItemList ] = useState(test);
 
   return (
     <View>

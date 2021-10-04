@@ -43,7 +43,6 @@ export async function signIn(email, password) {
   } catch (err) {
     console.log('something wrongs')
     Alert.alert("There is something wrong!", err.message);
-    
   }
 }
 
@@ -61,15 +60,5 @@ export async function forgotPassword (email) {
     alert('Please check your email...')
   } catch (err) {
     Alert.alert('There is something wrong!', err.message);
-  }
-}
-
-export async function getUser(currentUser) {
-  try {
-    const db = await firebase.firestore();
-    const user = db.collection("users").doc(currentUser).get();
-    return user;
-  } catch (err) {
-    Alert.alert("There is something wrong!", err.message);
   }
 }

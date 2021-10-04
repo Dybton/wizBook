@@ -7,60 +7,15 @@ import 'firebase/firestore'
 
 import Row from '../components/Row';
 
-import { booksRef, userBookCollection} from '../../App';
+import { booksRef} from '../../App';
 
 const ProfileScreen = ({ navigation }) => {
   const currentUserUID = firebase.auth().currentUser.uid;
   const [firstName, setFirstName] = useState('');
-  const [userBookTitles, setUserBookTitles] = useState([]);
   const [userBooks, setUserBooks] = useState([]);
   
-
-  // I need to change this into a real time listener
-  // See this https://www.youtube.com/watch?v=QaYts9sPmcY&t=9153s&ab_channel=SonnySangha
-  // Try to use it to assign userBookTItles 
-
-  // useEffect(() => {
-  //   userBookCollection.onSnapshot(snapshot => (
-  //     setUserBookTitles(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
-  //   ))
-  //   console.log(userBookTitles.id)
-  // }, [])
-
-  
-
-//   useEffect(()=> {
-//     userBookCollection.doc(currentUserUID+"_Book_Collection").onSnapshot((snapshot) =>
-//           snapshot.docs.map((doc) => ({
-//             data: doc.data(),
-//           }))
-//     )
-// }, []);
-
-  // useEffect(() => {
-  //   async function getUserBookTitles() {
-  //     firestore().collection('users').doc(currentUserUID).onSnapshot(snapshot => (
-  //       setUserBookTitles(snapshot.docs.)
-  //     ))
-  //   }
-  // })
-
-//   async function getUserInfo(){
-//     await firebase
-//     .firestore()
-//     .collection('users')
-//     .doc(currentUserUID)
-//     .onSnapshot(snapshot => (
-//       setUserObject(snapshot.docs.map(doc => (
-//         {
-//           dataObj: doc.data()
-//         }
-//       ))
-// }
-
-
-  // I need to change this into a real time listener.
   useEffect(() => {
+    // Here we get the user data, via a get statement
     async function getUserInfo(){
       let doc = await firebase
       .firestore()
@@ -71,16 +26,17 @@ const ProfileScreen = ({ navigation }) => {
       if (!doc.exists){
         Alert.alert('No user data found!')
       } else {
+        // We get the user name
         let dataObj = doc.data();
         setFirstName(dataObj.firstName)
-        // setUserBookTitles(dataObj.books)
+        // Inner function that filters the booksRef with the usersBooks
         booksRef.where("title", "in", dataObj.books).onSnapshot(snapshot => (
           setUserBooks(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})))
           ))
       }
     }
     getUserInfo();
-  }, [])
+  }, [userBooks]) // Call this the first time page is loaded, and if userBooks is changed.
 
       // Function that handles navigation back to login on logout
       const handlePress = (doc) => {
@@ -88,7 +44,6 @@ const ProfileScreen = ({ navigation }) => {
           navigation.replace('Login')
       }
 
-      
       return (
           <View style={styles.container}>
             <Text> Hi {firstName} </Text>
@@ -114,39 +69,8 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         marginTop: 75,
-        // borderColor: 'blue',
-        // borderWidth: 3,
         alignItems: 'center'
     }
-
 });
 
 export default ProfileScreen;
-
-
-
-
-// useEffect(() => {
-//   // get the user object using the currentUserId
-
-//     usersRef.doc(currentUserUID).get().then((doc) => {
-//     if (doc.exists) {
-//         helperFunc(doc.data().books);
-//         setUserBooks(doc.data().books);
-//         console.log('the userbooks are ' + userBooks)
-//     } else {
-//         console.log("No such document!");
-//       }
-//   }).catch((error) => {
-//       console.log("Error getting document:", error);
-//   });
-  
-
-//   // What I want is an array with all the books that the user has
-//   const helperFunc = (bookArray) => {
-//     booksRef.where("title", 'in', bookArray).onSnapshot(snapshot => (
-//       (snapshot.docs.map(doc => doc.data()))
-//       //NA it seems this helper function get's the titles but it DOESN'T return anything!!' - fix this
-//     ))
-//   };
-// }, [])
