@@ -24,7 +24,7 @@ const ProgressScreen = ({ navigation }) => {
       if (!doc.exists){
         Alert.alert('No user data found!')
       } else {
-        // We get the user name
+        // We get the user namee
         let dataObj = doc.data();
         setBooks(dataObj.books);
       }
